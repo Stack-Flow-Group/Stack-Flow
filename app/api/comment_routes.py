@@ -1,3 +1,7 @@
+# Need to verify: are the routes below used or not
+
+## Overrided by /api/questions/comments/:commentId
+
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 
@@ -61,7 +65,7 @@ def update_comment(comment_id):
     else:
         return form.errors, 401
 
-##Delete a question comment
+# Delete a question comment
 @comments_routes.route('/<int:comment_id>', methods=['DELETE'])
 @login_required
 def delete_comment(comment_id):
