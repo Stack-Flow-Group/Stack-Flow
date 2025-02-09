@@ -1126,6 +1126,40 @@ Returns all the tags of a specific question based on its id.
     }
     ```
 
+### Delete All Tags For a Question Based on the Question's id
+Removes all the tags of a specific question based on its id.
+
+* Require Authentication: true
+* Require proper authorization: Question must belong to the logged in user
+* Request
+  * Method: DELETE
+  * URL: /api/tags/questions/:questionId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted"
+    }
+    ```
+
+* Error response: Couldn't find a Question with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Question not found"
+    }
+    ```
+
 ## Follow/Save for Later
 ### Get all Saved Questions of Current User
 Return all the questions saved by the current user.
@@ -1436,6 +1470,37 @@ Delete an existing Question Comment.
     {
       "message": "Comment couldn't be found"
     }
+
+### Get a question comment based on comment id
+Returns the question comment of a specific comment id.
+
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/questions/comments/:commentId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      {
+        "id": 1,
+        "userId": 1,
+        "questionId": 1,
+        "comment": "Your question is neat!",
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+      }
+    }
+    ```
 
 ## Answer Comments
 ### Edit a Answer Comment

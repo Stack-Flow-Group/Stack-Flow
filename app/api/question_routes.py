@@ -5,11 +5,9 @@ from app.forms import AnswerForm, QuestionCommentForm, QuestionFollowingForm, Qu
 
 from flask_login import current_user, login_required
 
-
-
 question_routes = Blueprint('questions', __name__)
 
-
+# Get all questions
 @question_routes.route('/')
 def index():
     questions = Question.query.join(User).all()
@@ -247,6 +245,7 @@ def delete_question(id):
 
     return jsonify({"message": "Successfully deleted"})
 
+# Create Question
 @question_routes.route('/', methods=["POST"])
 @login_required
 def create_question():
@@ -350,6 +349,7 @@ def delete_tag(question_id, tag_id):
 #
 #     return jsonify(comments_res)
 
+# Get all Question Comments of a Question
 @question_routes.route('/<int:question_id>/comments', methods=['GET'])
 def question_comments(question_id):
     comments = QuestionComment.query.join(Question).filter(QuestionComment.question_id == question_id).all()
@@ -431,7 +431,7 @@ def update_comment(comment_id):
     else:
         return form.errors, 401
 
-##Delete a question comment
+# Delete a question comment
 @question_routes.route('/comments/<int:comment_id>', methods=['DELETE'])
 @login_required
 def delete_comment(comment_id):
@@ -503,6 +503,7 @@ def unfollow_question(question_id):
     }
     return jsonify(res), 200
 
+# Get a question comment based on comment id
 @question_routes.route('/comments/<int:comment_id>', methods=['GET'])
 @login_required
 def get_comment(comment_id):

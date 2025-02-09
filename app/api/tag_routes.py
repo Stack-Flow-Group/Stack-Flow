@@ -77,7 +77,8 @@ def add_tags(question_id):
     return jsonify(res), 200
   else:
     return form.errors, 400
-  
+
+# Delete All Tags For a Question Based on the Question's id
 @tag_routes.route('/questions/<int:question_id>', methods=['DELETE'])
 @login_required
 def delete_tags(question_id):
@@ -85,10 +86,10 @@ def delete_tags(question_id):
 
   if not question:
     return jsonify({"error": "Question not found"}), 404
-  
+
   elif current_user.id != question.user.id:
     return jsonify({"message": "Unauthorized"}), 401
-  
+
   questiontags = QuestionTag.query.filter(QuestionTag.question_id == question_id).all()
   for tag in questiontags:
     db.session.delete(tag)
@@ -96,4 +97,3 @@ def delete_tags(question_id):
   db.session.commit()
 
   return jsonify({"message": "Successfully deleted"})
-  
