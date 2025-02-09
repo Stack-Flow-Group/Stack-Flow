@@ -268,6 +268,31 @@ Create a new user, log in, and return the user's information.
     }
     ```
 
+### Get all questions of current user
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/questions/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+			"id": 1,
+			"question": "How do I write API's?",
+			"subject": "How do you make a readme",
+			"User": {
+        "id": 1,
+				"username": "testUser"
+		  }
+    }
+    ```
+
 ### Get a Question with Specific id
 Return details of a question with given question id
 

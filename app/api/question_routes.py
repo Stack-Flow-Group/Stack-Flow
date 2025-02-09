@@ -451,7 +451,7 @@ def delete_comment(comment_id):
     return jsonify({"message": "Successfully deleted"})
 
 
-# this will get all the questions the current user is following
+# Get all Saved Questions of Current User
 @question_routes.route('/saved/current')
 def questions_followed():
     following_questions = QuestionFollowing.query.join(Question).filter(QuestionFollowing.user_id == current_user.id).all()
@@ -477,7 +477,7 @@ def questions_followed():
 
     return jsonify(response)
 
-#Follow a Question
+# Save a Question for Later
 @question_routes.route('/<int:question_id>/saved', methods=['POST'])
 @login_required
 def follow_question(question_id):
@@ -489,7 +489,7 @@ def follow_question(question_id):
     }
     return jsonify(res), 200
 
-# Unfollow a Question
+# Unsave a Question
 @question_routes.route('/<int:question_id>/saved', methods=['DELETE'])
 @login_required
 def unfollow_question(question_id):
